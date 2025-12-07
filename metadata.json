@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Copy of Copy of testhjn",
+  "description": "Instant chats. Infinite connections.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

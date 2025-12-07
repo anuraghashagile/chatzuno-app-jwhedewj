@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatzuno | Instant Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              background: 'var(--background)',
+              surface: 'var(--surface)',
+              primary: 'var(--text-primary)',
+              secondary: 'var(--text-secondary)',
+              accent: 'var(--accent)',
+              accentHover: 'var(--accent-hover)',
+              userBubble: 'var(--user-bubble)',
+              userText: 'var(--user-text)',
+              strangerBubble: 'var(--stranger-bubble)',
+              strangerText: 'var(--stranger-text)',
+              inputBg: 'var(--input-bg)',
+              border: 'var(--border)',
+            },
+            fontFamily: {
+              sans: ['Roboto', 'sans-serif'],
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.5s ease-out forwards',
+              'slide-in-left': 'slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'slide-up': 'slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'slide-up-fade': 'slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'scale-in': 'scaleIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'float': 'float 6s ease-in-out infinite',
+              'soundwave': 'soundwave 1.2s ease-in-out infinite',
+              'recordwave': 'recordwave 0.8s ease-in-out infinite',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              slideInLeft: {
+                '0%': { opacity: '0', transform: 'translateX(-20px)' },
+                '100%': { opacity: '1', transform: 'translateX(0)' },
+              },
+              slideUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              slideUpFade: {
+                '0%': { opacity: '0', transform: 'translateY(40px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              scaleIn: {
+                '0%': { opacity: '0', transform: 'scale(0.98)' },
+                '100%': { opacity: '1', transform: 'scale(1)' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-20px)' },
+              },
+              soundwave: {
+                '0%, 100%': { height: '4px' },
+                '50%': { height: '24px' },
+              },
+              recordwave: {
+                '0%, 100%': { height: '8px' },
+                '50%': { height: '24px' },
+              },
+            }
+          },
+        },
+      };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        /* Light Mode Defaults - Pure White & Blue */
+        --background: #ffffff;
+        --surface: #ffffff;
+        --text-primary: #0f172a;
+        --text-secondary: #64748b;
+        --accent: #2563eb; /* Blue 600 */
+        --accent-hover: #1d4ed8;
+        --user-bubble: #2563eb;
+        --user-text: #ffffff;
+        --stranger-bubble: #f1f5f9;
+        --stranger-text: #334155;
+        --input-bg: #f8fafc;
+        --border: #e2e8f0;
+      }
+
+      .dark {
+        /* Dark Mode Defaults - Deep Cosmic */
+        --background: #0b001a; 
+        --surface: #150529;
+        --text-primary: #ffffff;
+        --text-secondary: #a1a1aa;
+        --accent: #8b5cf6; /* Violet Accent */
+        --accent-hover: #7c3aed;
+        --user-bubble: #8b5cf6;
+        --user-text: #ffffff;
+        --stranger-bubble: #27272a;
+        --stranger-text: #e4e4e7;
+        --input-bg: #1e1035;
+        --border: #2e1065;
+      }
+
+      body {
+        background-color: var(--background);
+        color: var(--text-primary);
+        font-family: 'Roboto', sans-serif;
+        transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1), color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      .darkveil-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+      
+      .icon-shadow {
+        filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.1));
+      }
+      
+      /* Custom Input Reset */
+      input, select {
+        outline: none;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react/jsx-runtime": "https://esm.sh/react@18.2.0/jsx-runtime",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react-dom": "https://esm.sh/react-dom@18.2.0",
+    "lucide-react": "https://esm.sh/lucide-react@0.344.0",
+    "ogl": "https://esm.sh/ogl@1.0.11",
+    "firebase/app": "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js",
+    "firebase/firestore": "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "firebase/": "https://aistudiocdn.com/firebase@^12.6.0/",
+    "vite": "https://aistudiocdn.com/vite@^7.2.6",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
